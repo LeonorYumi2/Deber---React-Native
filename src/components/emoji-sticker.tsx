@@ -52,6 +52,9 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
       <Animated.View style={[containerStyle, { top: -350 }]}>
         <GestureDetector gesture={doubleTap}>
           <Animated.Image
+            accessible
+            accessibilityLabel="Sticker"
+            accessibilityRole="image"
             source={stickerSource}
             resizeMode="contain"
             style={[{ width: imageSize, height: imageSize }, imageStyle]}

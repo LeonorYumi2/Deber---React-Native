@@ -1,5 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { EPN } from "@/constants/epn-theme";
 
 type Props = {
   label: string;
@@ -11,22 +12,21 @@ export default function Button({ label, theme, onPress }: Props) {
   if (theme === "primary") {
     return (
       <View
-        style={[
-          styles.buttonContainer,
-          { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
-        ]}
+        style={[styles.buttonContainer, styles.primaryContainer]}
       >
         <Pressable
-          style={[styles.button, { backgroundColor: "#fff" }]}
+          accessibilityLabel={label}
+          accessibilityRole="button"
+          style={[styles.button, styles.primaryButton]}
           onPress={onPress}
         >
           <FontAwesome
             name="picture-o"
-            size={18}
-            color="#25292e"
+            size={EPN.spacing.md}
+            color={EPN.colors.onPrimary}
             style={styles.buttonIcon}
           />
-          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+          <Text style={[styles.buttonLabel, styles.primaryLabel]}>
             {label}
           </Text>
         </Pressable>
@@ -36,35 +36,55 @@ export default function Button({ label, theme, onPress }: Props) {
 
   return (
     <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonLabel}>{label}</Text>
-      </Pressable>
+    <Pressable
+      accessibilityLabel={label}
+      accessibilityRole="button"
+      style={[styles.button, styles.secondaryButton]}
+      onPress={onPress}
+    >
+      <Text style={styles.buttonLabel}>{label}</Text>
+    </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
+    width: "90%",
+    minHeight: EPN.spacing.xl + EPN.spacing.md,
     alignItems: "center",
     justifyContent: "center",
-    padding: 3,
+    marginVertical: EPN.spacing.xs,
   },
   button: {
-    borderRadius: 10,
+    borderRadius: EPN.radius.md,
     width: "100%",
-    height: "100%",
+    minHeight: EPN.spacing.xl + EPN.spacing.md,
+    paddingHorizontal: EPN.spacing.lg,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
+  primaryContainer: {
+    alignSelf: "center",
+  },
+  primaryButton: {
+    backgroundColor: EPN.colors.primary,
+  },
+  secondaryButton: {
+    backgroundColor: EPN.colors.surface,
+    borderColor: EPN.colors.primary,
+    borderWidth: 2,
+  },
   buttonIcon: {
-    paddingRight: 8,
+    marginRight: EPN.spacing.sm,
   },
   buttonLabel: {
-    color: "#fff",
-    fontSize: 16,
+    color: EPN.colors.primary,
+    fontSize: EPN.font.body,
+    fontWeight: "700",
+  },
+  primaryLabel: {
+    color: EPN.colors.onPrimary,
   },
 });

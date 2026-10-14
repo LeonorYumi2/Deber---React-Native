@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ImageSourcePropType, StyleSheet, FlatList, Platform, Pressable } from 'react-native';
 import { Image } from 'expo-image';
+import { EPN } from '@/constants/epn-theme';
 
 type Props = {
   onSelect: (image: ImageSourcePropType) => void;
@@ -25,6 +26,8 @@ export default function EmojiList({ onSelect, onCloseModal }: Props) {
       contentContainerStyle={styles.listContainer}
       renderItem={({ item, index }) => (
         <Pressable
+          accessibilityLabel={`Seleccionar sticker ${index + 1}`}
+          accessibilityRole="button"
           onPress={() => {
             onSelect(item);
             onCloseModal();
@@ -38,9 +41,9 @@ export default function EmojiList({ onSelect, onCloseModal }: Props) {
 
 const styles = StyleSheet.create({
   listContainer: {
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: EPN.spacing.md,
+    paddingVertical: EPN.spacing.sm,
+    gap: EPN.spacing.md,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -48,6 +51,6 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    marginRight: 20,
+    borderRadius: EPN.radius.md,
   },
 });

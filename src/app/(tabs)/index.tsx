@@ -14,6 +14,7 @@ import IconButton from '@/components/icon-button';
 import ImageViewer from '@/components/image-viewer';
 
 import EmojiSticker from '@/components/emoji-sticker';
+import { EPN } from '@/constants/epn-theme';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
@@ -42,7 +43,7 @@ export default function Index() {
       setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
     } else {
-      alert('You did not select any image.');
+      alert('No seleccionaste ninguna imagen.');
     }
   };
 
@@ -68,7 +69,7 @@ export default function Index() {
 
         await MediaLibrary.saveToLibraryAsync(localUri);
         if (localUri) {
-          alert('Saved!');
+          alert('¡Imagen guardada!');
         }
       } catch (e) {
         console.log(e);
@@ -102,15 +103,15 @@ export default function Index() {
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
-            <IconButton icon="refresh" label="Reset" onPress={onReset} />
+            <IconButton icon="refresh" label="Restablecer" onPress={onReset} />
             <CircleButton onPress={onAddSticker} />
-            <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+            <IconButton icon="save-alt" label="Guardar" onPress={onSaveImageAsync} />
           </View>
         </View>
       ) : (
         <View style={styles.footerContainer}>
-          <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
-          <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+          <Button theme="primary" label="Elegir una foto" onPress={pickImageAsync} />
+          <Button label="Usar esta foto" onPress={() => setShowAppOptions(true)} />
         </View>
       )}
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
@@ -123,7 +124,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
+    backgroundColor: EPN.colors.background,
     alignItems: 'center',
   },
   imageContainer: {
@@ -132,6 +133,8 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1 / 3,
     alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: EPN.spacing.md,
   },
   optionsContainer: {
     position: 'absolute',
@@ -140,5 +143,8 @@ const styles = StyleSheet.create({
   optionsRow: {
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: EPN.colors.surface,
+    borderRadius: EPN.radius.lg,
+    padding: EPN.spacing.sm,
   },
 });

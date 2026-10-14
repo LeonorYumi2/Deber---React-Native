@@ -1,29 +1,39 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
+import { EPN } from "@/constants/epn-theme";
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#ffd33d",
-        headerStyle: { backgroundColor: "#25292e" },
+        tabBarActiveTintColor: EPN.colors.primary,
+        tabBarInactiveTintColor: EPN.colors.textMuted,
+        headerStyle: { backgroundColor: EPN.colors.primary },
         headerShadowVisible: false,
-        headerTintColor: "#fff",
+        headerTintColor: EPN.colors.onPrimary,
+        headerTitleStyle: {
+          fontSize: EPN.font.title,
+          fontWeight: "700",
+        },
         tabBarStyle: {
-          backgroundColor: "#25292e",
+          backgroundColor: EPN.colors.surface,
+          borderTopColor: EPN.colors.border,
+        },
+        tabBarLabelStyle: {
+          fontSize: EPN.font.caption,
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Inicio",
           headerTitle: "Sticker Smash",
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
               color={color}
-              size={30}
+              size={EPN.spacing.xl}
             />
           ),
         }}
@@ -31,14 +41,14 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="about"
         options={{
-          title: "About",
+          title: "Acerca de",
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={
                 focused ? "information-circle" : "information-circle-outline"
               }
               color={color}
-              size={30}
+              size={EPN.spacing.xl}
             />
           ),
         }}
